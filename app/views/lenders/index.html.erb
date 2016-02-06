@@ -1,0 +1,78 @@
+  <nav>
+    <div class="nav-wrapper blue">
+      <a href="#" class="brand-logo center">Need or Lend Money?</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
+
+
+<div class="row">
+<div class="col s12">
+<div class="col s4">
+	<h1>Lender</h1>
+	<form action="/lenders" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<p>	
+		<label for="first_name">First Name</label>
+		<input type="text" id="first_name" name="lender[first_name]"> 
+	</p>
+	<p>
+		<label for="last_name">Last Name</label>
+		<input type="text" id="last_name" name="lender[last_name]">
+	</p>
+	<p>	
+		<label for="email">Email</label>
+		<input type="text" id="email" name="lender[email]">
+	</p>	
+	<p>	
+		<label for="password">Password</label>
+		<input type="password" name="lender[password]" id="password">
+	</p>
+	<p>	
+		<label for="money">Money:</label>
+		<input type="integer" name="lender[money]">
+	</p>	
+		<input type="submit" value="Register" class="btn blue">
+	</form>
+	<a href="/lenders/login">Already a memeber?</a>
+</div>
+
+<div class="col s4">
+	<h1>Borrower</h1>
+	<form action="/borrowers" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<p>	
+		<label for="first_name">First Name:</label>
+		<input type="text" id="first_name" name="borrower[first_name]"> 
+	</p>
+	<p>
+		<label for="last_name">Last Name:</label>
+		<input type="text" id="last_name" name="borrower[last_name]">
+	</p>
+	<p>	
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="borrower[email]">
+	</p>	
+	<p>	
+		<label for="password">Password:</label>
+		<input type="password" name="borrower[password]">
+	</p>	
+	<p>	
+		<label for="purpose">Need Money For:</label>
+		<input type="text" name="borrower[purpose]">
+	</p>	
+	<p>	
+		<label for="purpose">Description:</label>
+		<input type="text" name="borrower[description]">
+	</p>
+	<p>	
+		<label for="money">Amount Needed:</label>
+		<input type="integer" name="borrower[money]">
+	</p>
+		<input type="submit" value="Register" class="btn blue">
+	</form>
+	<a href="/borrowers/login">Already a memeber?</a>
+</div>
+</div>
+</div>

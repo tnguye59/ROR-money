@@ -1,0 +1,83 @@
+<nav>
+	<div class="nav-wrapper blue">
+	  <a href="#" class="brand-logo">Lender Page</a>
+	  <ul id="nav-mobile" class="right hide-on-med-and-down">
+	    <li><a href="/sessions/logout">Log out</a></li>
+	  </ul>
+	</div>
+</nav>
+
+<div class="row">
+	<div class="col s10">
+
+	<h3>Name: <%= @lender.first_name %> <%= @lender.last_name%></h3>
+	<h5>Account Balance:  
+	<% if @total < 0 %>
+		<p>Not enough fund</p>
+	<% elsif %>
+		$<%= @total%>.00</h5>
+	<% end %>
+
+	<h3>List of people in need of help:</h3>
+	<table class="highlight">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Need Money for</th>
+				<th>Reason for Loan</th>
+				<th>Amount Needed</th>
+				<th>Amount Raised</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<% @borrowers.each do |b| %>
+		<tbody>
+			<tr>
+				<td><%= b.first_name %> <%= b.last_name %></td>
+				<td><%= b.purpose %></td>
+				<td><%= b.description %></td>
+				<td>$<%= b.money %></td>
+				<td>$<%= b.histories.sum(:amount) %></td>
+				<td>
+					<form action="/lend" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<input type="hidden" name="lender_id" value="<%= @lender.id %>">
+						<input type="hidden" name="borrower_id" value="<%= b.id %>">
+						<input type="number" name="amount">
+						<input type="submit" value="Lend" class="btn blue">
+					</form>
+				</td>
+			</tr>
+		</tbody>
+		<% end %>
+	</table>
+	</div>
+</div>
+
+<div class="row">
+<div class="col s12">
+<h3>List of People you lend money to</h3>
+<table class="striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Need Money for</th>
+			<th>Reason for Loan</th>
+			<th>Amount Needed</th>
+			<th>Amount Raised</th>
+		</tr>
+	</thead>
+	<% @lenders.each do |l| %>
+	<tbody>
+		<tr>
+			<td><%= l.borrower.first_name %> <%= l.borrower.last_name%></td>
+			<td><%= l.borrower.purpose %></td>
+			<td><%= l.borrower.description %></td>
+			<td>$<%= l.borrower.money %></td>
+			<td>$<%= l.amount %></td>
+		</tr>
+	</tbody>
+	<% end %>
+</table>
+</div>
+</div>
